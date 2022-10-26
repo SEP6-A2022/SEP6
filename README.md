@@ -4,9 +4,13 @@
 
 1. Install google cloud cli
 
+For mac:
+
 ```sh
 brew install --cask google-cloud-sdk
 ```
+
+For other platforms use <https://cloud.google.com/sdk/docs/install>
 
 2. Copy the project id from the Google cloud dashboard and use it in the command below.
 
