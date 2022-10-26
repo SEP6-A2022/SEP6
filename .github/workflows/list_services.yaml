@@ -3,6 +3,9 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
 
 permissions:
   id-token: write
@@ -20,6 +23,5 @@ jobs:
           service_account: "github-federation@favorable-tree-366516.iam.gserviceaccount.com"
     - id: 'gcloud'
       name: 'gcloud'
-      run: |-
-        gcloud auth login --brief --cred-file="${{ steps.auth.outputs.credentials_file_path }}"
+      run: |
         gcloud iam workload-identity-pools list --location="global" --show-deleted --project favorable-tree-366516
