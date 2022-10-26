@@ -2,7 +2,6 @@ name: List services in GCP
 on:
   push:
     branches:
-      - docs/initials-setup
       - main
 
 permissions:
