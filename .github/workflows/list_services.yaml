@@ -16,14 +16,14 @@ jobs:
   Get_OIDC_ID_token:
     runs-on: ubuntu-latest
     steps:
+    - uses: 'actions/checkout@v3'
+    
     - id: 'auth'
       name: 'Authenticate to GCP'
       uses: 'google-github-actions/auth@v0.8.3'
       with:
-          create_credentials_file: 'true'
           workload_identity_provider: 'projects/31676311622/locations/global/workloadIdentityPools/github-pool/providers/github-provider'
           service_account: "github-federation@favorable-tree-366516.iam.gserviceaccount.com"
-          # audience: https://iam.googleapis.com/projects/31676311622/locations/global/workloadIdentityPools/github-pool/providers/github-provider
     - id: 'gcloud'
       name: 'gcloud'
       run: |

@@ -42,11 +42,7 @@ gcloud iam service-accounts create github-federation --description="github actio
 3. Add project roles
 
 ```sh
-gcloud projects add-iam-policy-binding favorable-tree-366516 --member="serviceAccount:github-federation@favorable-tree-366516.iam.gserviceaccount.com" --role="roles/actions.Admin"
-```
-
-```sh
-gcloud projects add-iam-policy-binding favorable-tree-366516 --member="serviceAccount:github-federation@favorable-tree-366516.iam.gserviceaccount.com" --role="roles/cloudsql.admin"
+gcloud projects add-iam-policy-binding favorable-tree-366516 --member="serviceAccount:github-federation@favorable-tree-366516.iam.gserviceaccount.com" --role="roles/owner"
 ```
 
 4. Create identity pool.
