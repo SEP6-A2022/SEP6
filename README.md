@@ -62,3 +62,4 @@ gcloud iam workload-identity-pools providers create-oidc "github-provider" --pro
 ```sh
 gcloud iam service-accounts add-iam-policy-binding "github-federation@favorable-tree-366516.iam.gserviceaccount.com" --project="favorable-tree-366516" --role="roles/iam.workloadIdentityUser" --member="principalSet://iam.googleapis.com/projects/31676311622/locations/global/workloadIdentityPools/github-pool/attribute.repository/SEP6-A2022/SEP6"
 ```
+

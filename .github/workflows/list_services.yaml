@@ -20,19 +20,11 @@ jobs:
     
     - id: 'auth'
       name: 'Authenticate to GCP'
-      uses: 'google-github-actions/auth@v0.8.3'
+      uses: 'google-github-actions/auth@latest'
       with:
           workload_identity_provider: 'projects/31676311622/locations/global/workloadIdentityPools/github-pool/providers/github-provider'
           service_account: "github-federation@favorable-tree-366516.iam.gserviceaccount.com"
+          id_token_include_email: true
 
-    - id: 'secrets'
-      uses: 'google-github-actions/get-secretmanager-secrets@v0'
-      with:
-        secrets: |-
-          token:31676311622/test-secret
-
-    # Example of using the output
-    - id: 'publish'
-      env:
-        TOKEN: '${{ steps.secrets.outputs.token }}'
-      run: echo $TOKEN
+    - id : List
+      run: gcloud services list --project favorable-tree-366516   
