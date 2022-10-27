@@ -24,6 +24,8 @@ jobs:
       with:
           workload_identity_provider: 'projects/31676311622/locations/global/workloadIdentityPools/github-pool/providers/github-provider'
           service_account: "github-federation@favorable-tree-366516.iam.gserviceaccount.com"
+          audience: //iam.googleapis.com/projects/31676311622/locations/global/workloadIdentityPools/github-pool/providers/github-provider
+
     - id: 'gcloud'
       name: 'gcloud'
       run: |
