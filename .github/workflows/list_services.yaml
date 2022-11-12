@@ -28,8 +28,9 @@ jobs:
 
     - name: 'Use gcloud CLI'
       run: | 
-        gcloud info
-        gcloud config set project 31676311622
+        gcloud auth list
+        gcloud config list
+        gcloud projects list
 
     - name: create secret
       run: |
