@@ -30,4 +30,6 @@ jobs:
       uses: 'google-github-actions/setup-gcloud@v1'
 
     - name: 'Use gcloud CLI'
-      run: 'gcloud info'
+      run: | 
+        gcloud info
+        gcloud projects get-iam-policy favorable-tree-366516
