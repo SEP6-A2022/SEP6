@@ -28,5 +28,5 @@ jobs:
 
     - id : List
       run: |
-        gcloud config set account github-federation@favorable-tree-366516.iam.gserviceaccount.com
-        gcloud services list --project favorable-tree-366516   
+        gcloud services enable secretmanager.googleapis.com
+        echo -n "Demo" | gcloud secrets create First-password --data-file=-
