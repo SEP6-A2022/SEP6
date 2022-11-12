@@ -28,5 +28,4 @@ jobs:
 
     - id : List
       run: |
-        gcloud services enable secretmanager.googleapis.com
-        echo -n "Demo" | gcloud secrets create First-password --data-file=-
+        gcloud projects get-iam-policy favorable-tree-366516
