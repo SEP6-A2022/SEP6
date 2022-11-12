@@ -54,7 +54,7 @@ gcloud iam workload-identity-pools create "github-pool" --project="favorable-tre
 5. Create identity provider
 sh
 ```
-gcloud iam workload-identity-pools providers create-oidc "github-provider" --project="favorable-tree-366516" --location="global" --workload-identity-pool="github-pool" --display-name="Github Provider" --attribute-mapping="google.subject=assertion.sub,attribute.actor=assertion.actor,attribute.aud=assertion.aud" --issuer-uri="https://token.actions.githubusercontent.com"
+gcloud iam workload-identity-pools providers create-oidc "github-provider" --project="favorable-tree-366516" --location="global" --workload-identity-pool="github-pool" --display-name="Github Provider" --attribute-mapping="google.subject=assertion.sub,attribute.actor=assertion.actor,attribute.repository=assertion.repository" --issuer-uri="https://token.actions.githubusercontent.com"
 ```
 
 6. Allow impersonation
@@ -63,3 +63,8 @@ gcloud iam workload-identity-pools providers create-oidc "github-provider" --pro
 gcloud iam service-accounts add-iam-policy-binding "github-federation@favorable-tree-366516.iam.gserviceaccount.com" --project="favorable-tree-366516" --role="roles/iam.workloadIdentityUser" --member="principalSet://iam.googleapis.com/projects/31676311622/locations/global/workloadIdentityPools/github-pool/attribute.repository/SEP6-A2022/SEP6"
 ```
 
+7. export GOOGLE_PROJECT=favorable-tree-366516
+
+8. cloud storage buckets create gs://sep6-a2022
+
+9. pulumi login gs://sep6-a2022
