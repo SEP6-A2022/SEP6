@@ -27,4 +27,6 @@ jobs:
           id_token_include_email: true
 
     - id : List
-      run: gcloud services list --project favorable-tree-366516   
+      run: |
+        gcloud config set account github-federation@favorable-tree-366516.iam.gserviceaccount.com
+        gcloud services list --project favorable-tree-366516   
