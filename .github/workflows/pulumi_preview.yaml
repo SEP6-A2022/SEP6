@@ -22,11 +22,18 @@ jobs:
           workload_identity_provider: 'projects/31676311622/locations/global/workloadIdentityPools/github-pool/providers/github-provider'
           service_account: "github-federation@favorable-tree-366516.iam.gserviceaccount.com"
 
+    - name: Login to bucket
+      run: pulumi login gs://sep6-a2022
+
+    - name: Select stack
+      run: pulumi stack select dev
+
+    - name: NPM install
+      working-directory: src
+      run: npm i
+      
     - name: Pulumi preview
       working-directory: src
       env:
         PULUMI_CONFIG_PASSPHRASE: ""
-      run: |
-        pulumi login gs://sep6-a2022
-        pulumi stack select dev
-        pulumi preview
+      run: pulumi preview
