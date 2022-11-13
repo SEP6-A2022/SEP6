@@ -26,17 +26,17 @@ jobs:
       run: pulumi login gs://sep6-a2022
 
     - name: NPM install
-      working-directory: src
+      working-directory: product/src
       run: npm i
 
     - name: Select stack
-      working-directory: src
+      working-directory: product/src
       env:
         PULUMI_CONFIG_PASSPHRASE: ""
       run: pulumi stack select dev
       
     - name: Pulumi preview
-      working-directory: src
+      working-directory: product/src
       env:
         PULUMI_CONFIG_PASSPHRASE: ""
       run: pulumi preview
