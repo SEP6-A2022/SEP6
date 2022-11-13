@@ -30,6 +30,7 @@ jobs:
       run: npm i
 
     - name: Select stack
+      working-directory: src
       env:
         PULUMI_CONFIG_PASSPHRASE: ""
       run: pulumi stack select dev
