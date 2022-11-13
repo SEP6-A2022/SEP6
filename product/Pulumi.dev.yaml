@@ -1,0 +1,7 @@
+encryptionsalt: v1:g7CQ3ul1TSI=:v1:rCumgI1wPjZmL48W:Low1ZRlFcVqufcWl8Is7axAqIRCq/Q==
+config:
+  gcp:project: favorable-tree-366516
+  gcp:zone: europe-west1
+  SEP6:stack_settings:
+    k8s:
+      instance_type: e2-micro

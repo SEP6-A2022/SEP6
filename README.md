@@ -68,3 +68,34 @@ gcloud iam service-accounts add-iam-policy-binding "github-federation@favorable-
 8. cloud storage buckets create gs://sep6-a2022
 
 9. pulumi login gs://sep6-a2022
+
+10. Deploy secrets.
+
+11. Enable api
+
+```sh
+gcloud services enable sqladmin.googleapis.com
+gcloud services enable container.googleapis.com
+```
+
+12. Create  bucket
+AND ADD THE FILE TO THE BUCKET.
+
+13. Dump the db.
+
+```sh
+sqlite3 -header -csv movies.db "select * from movies;" > movies.csv
+sqlite3 -header -csv movies.db "select * from people;" > people.csv
+sqlite3 -header -csv movies.db "select * from stars;" > stars.csv
+sqlite3 -header -csv movies.db "select * from directors;" > directors.csv
+sqlite3 -header -csv movies.db "select * from ratings;" > ratings.csv
+```
+
+14. Upload sql file there
+15. Import to db.
+
+```sh
+psql -h 34.79.53.136 -d movies-pg -U postgres -W -f movies-pg.sql -L logfile.log
+```
+
+or in the UI import and select the db and file.
