@@ -25,12 +25,14 @@ jobs:
     - name: Login to bucket
       run: pulumi login gs://sep6-a2022
 
-    - name: Select stack
-      run: pulumi stack select dev
-
     - name: NPM install
       working-directory: src
       run: npm i
+
+    - name: Select stack
+      env:
+        PULUMI_CONFIG_PASSPHRASE: ""
+      run: pulumi stack select dev
       
     - name: Pulumi preview
       working-directory: src
