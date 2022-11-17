@@ -83,19 +83,25 @@ AND ADD THE FILE TO THE BUCKET.
 
 13. Dump the db.
 
-```sh
-sqlite3 -header -csv movies.db "select * from movies;" > movies.csv
-sqlite3 -header -csv movies.db "select * from people;" > people.csv
-sqlite3 -header -csv movies.db "select * from stars;" > stars.csv
-sqlite3 -header -csv movies.db "select * from directors;" > directors.csv
-sqlite3 -header -csv movies.db "select * from ratings;" > ratings.csv
+```sql
+DELETE FROM stars WHERE person_id NOT IN (SELECT id FROM people);
+DELETE FROM stars WHERE movie_id NOT IN (SELECT id FROM movies);
+DELETE FROM directors WHERE person_id NOT IN (SELECT id FROM people);
+DELETE FROM directors WHERE movie_id NOT IN (SELECT id FROM movies);
+DELETE FROM ratings WHERE movie_id NOT IN (SELECT id FROM movies);
 ```
 
-14. Upload sql file there
-15. Import to db.
-
 ```sh
-psql -h 34.79.53.136 -d movies-pg -U postgres -W -f movies-pg.sql -L logfile.log
+sqlite3 movies.db .dump | sed -e 's/INTEGER PRIMARY KEY AUTOINCREMENT/SERIAL PRIMARY KEY/g;s/PRAGMA foreign_keys=OFF;//;s/unsigned big int/BIGINT/g;s/UNSIGNED BIG INT/BIGINT/g;s/BIG INT/BIGINT/g;s/UNSIGNED INT(10)/BIGINT/g;s/BOOLEAN/SMALLINT/g;s/boolean/SMALLINT/g;s/UNSIGNED BIG INT/INTEGER/g;s/INT(3)/INT2/g;s/DATETIME/TIMESTAMP/g;s/TINYINT(1)/SMALLINT/g' > movies-pg.sql
 ```
 
-or in the UI import and select the db and file.
+14. Upload SQL file there
+15. Import to DB.
+
+```sh
+psql -h 34.79.53.136 -d movies-pg -U postgres -W -f movies-pg.sql
+```
+
+or in the UI import and select the DB and file.
+
+<https://www.prisma.io/docs/concepts/components/introspection#the-prisma-introspect-command>
