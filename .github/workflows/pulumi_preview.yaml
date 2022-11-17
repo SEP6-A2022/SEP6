@@ -1,0 +1,41 @@
+name: Run Pulumi preview on PR
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  id-token: write
+  contents: read
+  
+
+
+jobs:
+  Pulumi_preview:
+    env:
+        PULUMI_CONFIG_PASSPHRASE: ""
+    runs-on: ubuntu-latest
+    steps:
+    - uses: 'actions/checkout@v3'
+    
+    - id: 'auth'
+      name: Authenticate to Google Cloud
+      uses: google-github-actions/auth@v1.0.0
+      with:
+          workload_identity_provider: 'projects/31676311622/locations/global/workloadIdentityPools/github-pool/providers/github-provider'
+          service_account: "github-federation@favorable-tree-366516.iam.gserviceaccount.com"
+
+    - name: Login to bucket
+      run: pulumi login gs://sep6-a2022
+
+    - name: NPM install
+      working-directory: product/infra
+      run: npm i
+
+    - name: Select stack
+      working-directory: product/infra
+      run: pulumi stack select dev
+      
+    - name: Pulumi preview
+      working-directory: product/infra
+      run: pulumi preview
