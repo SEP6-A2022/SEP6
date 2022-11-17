@@ -23,6 +23,7 @@ const main =async () => {
     const database = new gcp.sql.Database("postgres", {instance: instance.name, name: "movies-pg"});
 
     const res = deployContainer(clusterSettings.docker)
+    res.statuses.apply(v => pulumi.log.info(v[0].url))
 }
 
 main()
