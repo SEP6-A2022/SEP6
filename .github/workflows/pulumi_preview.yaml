@@ -9,8 +9,11 @@ permissions:
   contents: read
   
 
+
 jobs:
   Pulumi_preview:
+    env:
+        PULUMI_CONFIG_PASSPHRASE: ""
     runs-on: ubuntu-latest
     steps:
     - uses: 'actions/checkout@v3'
@@ -24,19 +27,15 @@ jobs:
 
     - name: Login to bucket
       run: pulumi login gs://sep6-a2022
+    
+    - name: Change dir
+      run: cd infra/product/src
 
     - name: NPM install
-      working-directory: product/src
       run: npm i
 
     - name: Select stack
-      working-directory: product/src
-      env:
-        PULUMI_CONFIG_PASSPHRASE: ""
       run: pulumi stack select dev
       
     - name: Pulumi preview
-      working-directory: product/src
-      env:
-        PULUMI_CONFIG_PASSPHRASE: ""
       run: pulumi preview

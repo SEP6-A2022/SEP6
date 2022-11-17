@@ -10,7 +10,9 @@ permissions:
   
 
 jobs:
-  Get_OIDC_ID_token:
+  Pulumi_up:
+    env:
+        PULUMI_CONFIG_PASSPHRASE: ""
     runs-on: ubuntu-latest
     steps:
     - uses: 'actions/checkout@v3'
@@ -22,12 +24,17 @@ jobs:
           workload_identity_provider: 'projects/31676311622/locations/global/workloadIdentityPools/github-pool/providers/github-provider'
           service_account: "github-federation@favorable-tree-366516.iam.gserviceaccount.com"
 
-    - name: 'Use gcloud CLI'
-      run: | 
-        gcloud auth list
-        gcloud config list
-        gcloud projects list
+    - name: Login to bucket
+      run: pulumi login gs://sep6-a2022
+    
+    - name: Change dir
+      run: cd infra/product/src
 
-    - name: create secret
-      run: |
-        echo -n "Demo" | gcloud secrets create password --data-file=-
+    - name: NPM install
+      run: npm i
+
+    - name: Select stack
+      run: pulumi stack select dev
+      
+    - name: Pulumi up
+      run: pulumi up -y
