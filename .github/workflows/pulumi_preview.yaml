@@ -1,4 +1,4 @@
-name: List services in GCP
+name: Run Pulumi preview on PR
 on:
   pull_request:
     branches:
@@ -29,7 +29,7 @@ jobs:
       run: pulumi login gs://sep6-a2022
     
     - name: Change dir
-      run: cd infra/product/src
+      run: cd product/infra
 
     - name: NPM install
       run: npm i

@@ -1,4 +1,4 @@
-name: List services in GCP
+name: Run Pulumi up
 on:
   push:
     branches:
@@ -28,7 +28,7 @@ jobs:
       run: pulumi login gs://sep6-a2022
     
     - name: Change dir
-      run: cd ./SEP6/infra/product/src
+      run: cd product/infra
 
     - name: NPM install
       run: npm i
