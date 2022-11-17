@@ -18,7 +18,7 @@ export const deployContainer = (config: IDockerSettings) => {
         imageName: pulumi.interpolate`gcr.io/${gcp.config.project}/${imageName}:v1.0.0`,
         build: {
             context: "../client",
-            extraOptions: ["--platform linux/amd64"]
+            // extraOptions: ["--platform linux/amd64"]
         },
     });
 
