@@ -6,6 +6,7 @@
         "@types/node": "18.11.9"
     },
     "dependencies": {
+        "@pulumi/docker": "^3.6.0",
         "@pulumi/gcp": "6.42.0",
         "@pulumi/kubernetes": "3.22.1",
         "@pulumi/pulumi": "3.46.1",

@@ -3,5 +3,5 @@ config:
   gcp:project: favorable-tree-366516
   gcp:zone: europe-west1
   SEP6:stack_settings:
-    k8s:
+    docker:
       instance_type: e2-micro

@@ -76,6 +76,7 @@ gcloud iam service-accounts add-iam-policy-binding "github-federation@favorable-
 ```sh
 gcloud services enable sqladmin.googleapis.com
 gcloud services enable container.googleapis.com
+gcloud services enable run.googleapis.com
 ```
 
 12. Create  bucket

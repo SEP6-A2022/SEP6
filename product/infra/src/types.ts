@@ -1,6 +1,6 @@
 export interface PulumiStackSettings {
-    k8s: IK8Settings
+    docker: IDockerSettings
 }
-export interface IK8Settings {
+export interface IDockerSettings {
     instance_type: string
 }
