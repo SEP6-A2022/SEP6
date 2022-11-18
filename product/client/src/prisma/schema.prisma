@@ -1,0 +1,49 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model directors {
+  movie_id  Int
+  person_id Int
+  movies    movies @relation(fields: [movie_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  people    people @relation(fields: [person_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  @@id([movie_id, person_id])
+}
+
+model movies {
+  id        Int         @id
+  title     String
+  year      Decimal?    @db.Decimal
+  directors directors[] @ignore
+  ratings   ratings[]   @ignore
+  stars     stars[]     @ignore
+}
+
+model people {
+  id        Int         @id
+  name      String
+  birth     Decimal?    @db.Decimal
+  directors directors[] @ignore
+  stars     stars[]     @ignore
+}
+
+model ratings {
+  movie_id Int @id
+  rating   Float  @db.Real
+  votes    Int
+  movies   movies @relation(fields: [movie_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model stars {
+  movie_id  Int
+  person_id Int
+  movies    movies @relation(fields: [movie_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  people    people @relation(fields: [person_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  
+  @@id([movie_id, person_id])
+}

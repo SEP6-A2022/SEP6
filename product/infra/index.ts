@@ -20,10 +20,18 @@ const main =async () => {
         deletionProtection: false,
     });
 
-    const database = new gcp.sql.Database("postgres", {instance: instance.name, name: "movies-pg"});
+    const dbName = "movies-pg"
+    // don't forget to load data here.
+    const database = new gcp.sql.Database("postgres", {instance: instance.name, name: dbName});
 
-    const res = deployContainer(clusterSettings.docker)
-    res.statuses.apply(v => pulumi.log.info(v[0].url))
+    instance.publicIpAddress.apply(ip=> {
+        basic.secretData.apply(pass=> {
+            const dbConnectionString = `postgresql://db-user:${pass}@${ip}:5432/${dbName}?schema=public`
+            pulumi.log.info(dbConnectionString)
+            const res = deployContainer(clusterSettings.docker, dbConnectionString)
+            res.statuses.apply(v => pulumi.log.info(v[0].url))
+        })
+    })
 }
 
 main()
