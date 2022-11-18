@@ -1,19 +1,20 @@
 FROM node:alpine
 
 # Create app directory
-WORKDIR /usr/src/app
+WORKDIR /usr/src/client
 
 # COPY package.json .
-# For npm@5 or later, copy package-lock.json as well
-COPY package.json package-lock.json ./
+
+COPY . .
+RUN ls -la
 
 # Install app dependencies
 RUN npm install
 
-# Bundle app source
-COPY . .
+# Build the app
+RUN npm run build
 
 EXPOSE 3000
 
 # Start Node server
-CMD [ "npm", "start" ]
+CMD [ "node", "bin" ]
