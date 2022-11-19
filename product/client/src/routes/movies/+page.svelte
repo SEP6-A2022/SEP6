@@ -10,21 +10,17 @@ let movies = []
 onMount(async ()=>{
     let title = $page.url.searchParams.get('title')
     searchedMovie =  title ? title : "" 
-    if(searchedMovie!="")
-    {
-        fetchMovie()
-    }
+    fetchMovie()
 })
 
 const fetchMovie =async () => {
-    const response = await fetch(`/api/movies?title=${searchedMovie}`, {
+    const response = await fetch(`/api/movies?title=${searchedMovie}&first=10`, {
         method: 'GET',
         headers: {
             'content-type': 'application/json'
         }
     });
     movies = await response.json()
-    console.log(movies)
 }
 
 const handleChange =async () => {

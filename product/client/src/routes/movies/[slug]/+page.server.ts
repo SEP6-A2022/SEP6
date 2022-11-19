@@ -10,7 +10,7 @@ export async function load({ params }) {
     const isnum = /^\d+$/.test(movieId);
     if(!isnum)
     {
-        throw error(404, 'Only numeric ids accepted');
+        throw error(406, `Only numeric movie id's (with or without tt) are accepted, got "${movieId}"`);
     }
     
     while(movieId.startsWith("0"))
