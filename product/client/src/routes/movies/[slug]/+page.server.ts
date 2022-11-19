@@ -1,6 +1,6 @@
 import { error } from '@sveltejs/kit';
 
-import { PrismaClient, type movies, type people } from '@prisma/client'
+import { PrismaClient, type movies, type people, type ratings } from '@prisma/client'
 const prisma = new PrismaClient()
 
 /** @type {import('./$types').PageServerLoad} */
@@ -53,13 +53,20 @@ export async function load({ params }) {
                 actors.push(actor)
             }
         }
+        const rating = await prisma.ratings.findFirst({
+            where: {
+                movie_id: movie.id
+            }
+        })
         // console.log(movie)
         // console.log(dirPerson)
         // console.log(actors)
+        console.log(rating)
         return {
             movie: JSON.parse(JSON.stringify(movie)) as movies,
             actors: JSON.parse(JSON.stringify(actors)) as people[],
             director: JSON.parse(JSON.stringify(dirPerson)) as people,
+            rating: JSON.parse(JSON.stringify(rating)) as ratings
         }
         
     }
