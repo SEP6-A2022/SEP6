@@ -1,19 +1,26 @@
-FROM node:alpine
+FROM node:16.14-bullseye-slim
 
 # Create app directory
-WORKDIR /usr/src/app
+WORKDIR /usr/src/client
 
 # COPY package.json .
-# For npm@5 or later, copy package-lock.json as well
-COPY package.json package-lock.json ./
+
+COPY . .
+
+RUN npm install -g prisma
 
 # Install app dependencies
-RUN npm install
+RUN npm i
 
-# Bundle app source
-COPY . .
+# Generate prisma client
+RUN prisma generate --schema=./src/prisma/schema.prisma
+
+# Build the app
+RUN npm run build
+
+RUN npm uninstall -g prisma
 
 EXPOSE 3000
 
 # Start Node server
-CMD [ "npm", "start" ]
+CMD [ "node", "bin" ]

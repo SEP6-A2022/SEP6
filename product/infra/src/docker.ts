@@ -3,7 +3,7 @@ import * as gcp from "@pulumi/gcp";
 import * as pulumi from "@pulumi/pulumi";
 import { IDockerSettings } from "./types";
 
-export const deployContainer = (config: IDockerSettings) => {
+export const deployContainer = (config: IDockerSettings, dbConnectionString: string) => {
     // Location to deploy Cloud Run services
     const location = gcp.config.zone ?? ""
 
@@ -32,6 +32,16 @@ export const deployContainer = (config: IDockerSettings) => {
                     ports:[
                         {
                             containerPort: 3000
+                        }
+                    ],
+                    envs: [
+                        {
+                            name: "DATABASE_URL",
+                            value: dbConnectionString
+                        },
+                        {
+                            name: "time",
+                            value: new Date().getSeconds()+""
                         }
                     ]
                 }],

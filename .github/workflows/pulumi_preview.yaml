@@ -9,7 +9,6 @@ permissions:
   contents: read
   
 
-
 jobs:
   Pulumi_preview:
     env:
