@@ -23,7 +23,6 @@ export async function load({ params }) {
             id: +movieId
         }
     })
-    console.log(movie)
     if(movie)
     {
         const director = await prisma.directors.findFirst({
@@ -54,8 +53,9 @@ export async function load({ params }) {
                 actors.push(actor)
             }
         }
-        console.log(dirPerson)
-        console.log(actors)
+        // console.log(movie)
+        // console.log(dirPerson)
+        // console.log(actors)
         return {
             movie: JSON.parse(JSON.stringify(movie)) as movies,
             actors: JSON.parse(JSON.stringify(actors)) as people[],
