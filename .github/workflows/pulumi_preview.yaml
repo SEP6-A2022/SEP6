@@ -17,14 +17,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: 'actions/checkout@v3'
-
-    - name: Install client packages
-      working-directory: product/client
-      run: npm i
-        
-    - name: Try building
-      working-directory: product/client
-      run: npm run build
     
     - id: 'auth'
       name: Authenticate to Google Cloud
