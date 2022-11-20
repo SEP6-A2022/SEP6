@@ -1,15 +1,16 @@
 import { error } from '@sveltejs/kit';
- 
+import type { RequestEvent } from '@sveltejs/kit';
+
 import { PrismaClient, type movies, type people } from '@prisma/client'
 const prisma = new PrismaClient()
 const total = await prisma.movies.count();
 
 
 /** @type {import('./$types').RequestHandler} */
-export async function GET({ url }) {
+export async function GET({ url }: RequestEvent) {
   const title = url.searchParams.get('title');
   const first = url.searchParams.get('first');
-  const isnum = /^\d+$/.test(first);
+  const isnum = /^\d+$/.test(first ?  first: "");
 
   if(title)
   {
