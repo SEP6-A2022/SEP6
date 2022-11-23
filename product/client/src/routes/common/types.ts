@@ -48,3 +48,8 @@ export interface IJwtData {
     get_refresh: boolean
     exp: number
 }
+
+export interface IRegisterUser {
+    email: string,
+    password: string
+}

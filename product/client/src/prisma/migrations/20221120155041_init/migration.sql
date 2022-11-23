@@ -10,7 +10,7 @@ CREATE TABLE "directors" (
 CREATE TABLE "movies" (
     "id" INTEGER NOT NULL,
     "title" TEXT NOT NULL,
-    "description" TEXT NOT NULL,
+    "description" TEXT NOT NULL DEFAULT '',
     "year" DECIMAL,
 
     CONSTRAINT "movies_pkey" PRIMARY KEY ("id")
@@ -43,17 +43,17 @@ CREATE TABLE "stars" (
 );
 
 -- CreateTable
-CREATE TABLE "toplist" (
+CREATE TABLE "toplists" (
     "id" SERIAL NOT NULL,
     "name" VARCHAR(50) NOT NULL,
     "moviesJson" TEXT NOT NULL,
     "authorId" INTEGER NOT NULL,
 
-    CONSTRAINT "toplist_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "toplists_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "User" (
+CREATE TABLE "users" (
     "id" SERIAL NOT NULL,
     "name" VARCHAR(50) NOT NULL,
     "email" VARCHAR(50) NOT NULL,
@@ -61,7 +61,7 @@ CREATE TABLE "User" (
     "passwordSalt" TEXT NOT NULL,
     "preferencesJson" TEXT NOT NULL,
 
-    CONSTRAINT "User_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "users_pkey" PRIMARY KEY ("id")
 );
 
 -- AddForeignKey
@@ -80,4 +80,4 @@ ALTER TABLE "stars" ADD CONSTRAINT "stars_movie_id_fkey" FOREIGN KEY ("movie_id"
 ALTER TABLE "stars" ADD CONSTRAINT "stars_person_id_fkey" FOREIGN KEY ("person_id") REFERENCES "people"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE "toplist" ADD CONSTRAINT "toplist_authorId_fkey" FOREIGN KEY ("authorId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "toplists" ADD CONSTRAINT "toplists_authorId_fkey" FOREIGN KEY ("authorId") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

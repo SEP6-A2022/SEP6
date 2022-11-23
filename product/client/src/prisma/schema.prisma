@@ -18,19 +18,19 @@ model directors {
 model movies {
   id        Int         @id
   title     String
-  description String
+  description String    @default("")
   year      Decimal?    @db.Decimal
-  directors directors[] @ignore
-  ratings   ratings[]   @ignore
-  stars     stars[]     @ignore
+  directors directors[]
+  ratings   ratings[]
+  stars     stars[]
 }
 
 model people {
   id        Int         @id
   name      String
   birth     Decimal?    @db.Decimal
-  directors directors[] @ignore
-  stars     stars[]     @ignore
+  directors directors[] 
+  stars     stars[]     
 }
 
 model ratings {
@@ -49,20 +49,20 @@ model stars {
   @@id([movie_id, person_id])
 }
 
-model toplist {
+model toplists {
   id    Int    @id @default(autoincrement())
   name  String @db.VarChar(50)
   moviesJson String
   authorId  Int
-  author    User  @relation(fields: [authorId], references: [id])
+  author    users  @relation(fields: [authorId], references: [id])
 }
 
-model User {
+model users {
   id    Int    @id @default(autoincrement())
   name  String @db.VarChar(50)
   email String @db.VarChar(50)
   saltedPassword String
   passwordSalt String
-  toplists toplist[]
+  toplists toplists[]
   preferencesJson String
 }

@@ -41,7 +41,12 @@ export const load: Load = async ({ params, url }) => {
       })
     const userData = await userInfo.json() as IUserResponse
 
-    let user = await prisma.user.findFirst({
+    if(userInfo.ok || !userData)
+    {
+        if(!accessSigningKey) throw error(500, "Cannot retreive user info! Code 5");
+    }
+
+    let user = await prisma.users.findFirst({
         where: {
             email: userData.email
         }
@@ -50,7 +55,7 @@ export const load: Load = async ({ params, url }) => {
     if(!user)
     {
         console.log("User not found!")
-        user = await prisma.user.create({
+        user = await prisma.users.create({
             data: {
                 email: userData.email,
                 name: userData.login,
