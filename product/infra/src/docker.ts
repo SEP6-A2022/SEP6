@@ -1,11 +1,18 @@
 import * as docker from "@pulumi/docker";
 import * as gcp from "@pulumi/gcp";
+import { Service } from "@pulumi/gcp/cloudrun";
 import * as pulumi from "@pulumi/pulumi";
 import { IDockerSettings } from "./types";
+import { getSecretValue } from "./util";
 
-export const deployContainer = (config: IDockerSettings, dbConnectionString: string) => {
+export const deployContainer = async (config: IDockerSettings, dbConnectionString: string): Promise<Service> => {
     // Location to deploy Cloud Run services
     const location = gcp.config.zone ?? ""
+
+    const githubClientId = "11c2d39160e19c5d2ab0"
+    const jwtAccessSecret = await getSecretValue("JWT_ACCESS_SECRET")
+    const jwtRefreshSecret =  await getSecretValue("JWT_REFRESH_SECRET")
+    const githubOauthSecret =  await getSecretValue("GITHUB_OAUTH_SECRET")
 
     // Build a Docker image from our sample Express app and put it to Google Container Registry.
     // Note: Run `gcloud auth configure-docker` in your command line to configure auth to GCR.
@@ -40,6 +47,22 @@ export const deployContainer = (config: IDockerSettings, dbConnectionString: str
                             value: dbConnectionString
                         },
                         {
+                            name: "GITHUB_CLIENT_ID",
+                            value: githubClientId
+                        },
+                        {
+                            name: "GITHUB_OAUTH_SECRET",
+                            value: githubOauthSecret
+                        },
+                        {
+                            name: "JWT_ACCESS_TOKEN_SECRET_STRING",
+                            value: jwtAccessSecret
+                        },
+                        {
+                            name: "JWT_REFRESH_TOKEN_SECRET_STRING",
+                            value: jwtRefreshSecret
+                        },
+                        {
                             name: "time",
                             value: new Date().getSeconds()+""
                         }
@@ -58,6 +81,5 @@ export const deployContainer = (config: IDockerSettings, dbConnectionString: str
         member: "allUsers",
     });
 
-    // Export the URL
     return expressService;
 }

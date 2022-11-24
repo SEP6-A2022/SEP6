@@ -18,18 +18,19 @@ model directors {
 model movies {
   id        Int         @id
   title     String
+  description String    @default("")
   year      Decimal?    @db.Decimal
-  directors directors[] @ignore
-  ratings   ratings[]   @ignore
-  stars     stars[]     @ignore
+  directors directors[]
+  ratings   ratings[]
+  stars     stars[]
 }
 
 model people {
   id        Int         @id
   name      String
   birth     Decimal?    @db.Decimal
-  directors directors[] @ignore
-  stars     stars[]     @ignore
+  directors directors[] 
+  stars     stars[]     
 }
 
 model ratings {
@@ -46,4 +47,22 @@ model stars {
   people    people @relation(fields: [person_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
   
   @@id([movie_id, person_id])
+}
+
+model toplists {
+  id    Int    @id @default(autoincrement())
+  name  String @db.VarChar(50)
+  moviesJson String
+  authorId  Int
+  author    users  @relation(fields: [authorId], references: [id])
+}
+
+model users {
+  id    Int    @id @default(autoincrement())
+  name  String @db.VarChar(50)
+  email String @db.VarChar(50)
+  saltedPassword String
+  passwordSalt String
+  toplists toplists[]
+  preferencesJson String
 }

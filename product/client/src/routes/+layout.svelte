@@ -1,10 +1,12 @@
 <script>
 	import Header from './Header.svelte';
+	import AuthController from './AuthController.svelte';
 	import './styles.css';
 </script>
 
 <div class="app">
 	<Header />
+	<AuthController />
 
 	<main>
 		<slot />

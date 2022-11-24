@@ -2,6 +2,7 @@
 	import { page } from '$app/stores';
 	import logo from '$lib/images/svelte-logo.svg';
 	import github from '$lib/images/github.svg';
+	import {loggedInUser} from "../stores"
 </script>
 
 <header>
@@ -27,6 +28,14 @@
 			</li>
 			<li aria-current={$page.url.pathname === '/movies' ? 'page' : undefined}>
 				<a href="/movies">Movies</a>
+			</li>
+			<li aria-current={$page.url.pathname.includes("user") ? 'page' : undefined}>
+				<a href="/user">
+					{#if $loggedInUser.content?.name}
+						{$loggedInUser.content?.name}
+						{:else}
+						Login
+					{/if}</a>
 			</li>
 		</ul>
 		<svg viewBox="0 0 2 3" aria-hidden="true">
