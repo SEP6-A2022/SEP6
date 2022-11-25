@@ -20,7 +20,10 @@ export const deployContainer = async (config: IDockerSettings, dbConnectionStrin
     const myImage = new docker.Image(imageName, {
         imageName: pulumi.interpolate`gcr.io/${gcp.config.project}/${imageName}:v1.0.0`,
         build: {
-            context: "../client"
+            context: "../client",
+            env: {
+                "DATABASE_URL" : dbConnectionString
+            }
         },
     });
 
