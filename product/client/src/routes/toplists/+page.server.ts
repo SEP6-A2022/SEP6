@@ -3,11 +3,15 @@ import type { Load} from "@sveltejs/kit"
 
 import { PrismaClient, type movies, type people, type ratings, type toplists } from '@prisma/client'
 const prisma = new PrismaClient()
+let total = -1;
 
-const total = await prisma.toplists.count();
 
 /** @type {import('./$types').PageServerLoad} */
 export const load : Load = async ({params}) => {
+    if(total===-1)
+    {
+        total = await prisma.toplists.count();
+    }
     const first = 15
     let skip = Math.floor(Math.random() * total);
     if(total-skip<first){

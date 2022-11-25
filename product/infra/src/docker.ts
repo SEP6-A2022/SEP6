@@ -16,15 +16,11 @@ export const deployContainer = async (config: IDockerSettings, dbConnectionStrin
 
     // Build a Docker image from our sample Express app and put it to Google Container Registry.
     // Note: Run `gcloud auth configure-docker` in your command line to configure auth to GCR.
-    process.env.DATABASE_URL = dbConnectionString
     const imageName = "express-app";
     const myImage = new docker.Image(imageName, {
         imageName: pulumi.interpolate`gcr.io/${gcp.config.project}/${imageName}:v1.0.0`,
         build: {
             context: "../client",
-            env: {
-                "DATABASE_URL" : dbConnectionString
-            }
         },
     });
 
