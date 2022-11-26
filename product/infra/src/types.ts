@@ -3,4 +3,5 @@ export interface PulumiStackSettings {
 }
 export interface IDockerSettings {
     instance_type: string
+    dns_name: string
 }
