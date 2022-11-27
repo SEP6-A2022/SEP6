@@ -41,3 +41,16 @@ jobs:
     - name: Pulumi up
       working-directory: product/infra
       run: pulumi up -y
+
+  Run_tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: 'actions/checkout@v3'
+
+      - name: Install modules
+        working-directory: product/tests
+        run: npm i
+
+      - name: Check availability
+        working-directory: product/tests
+        run: npx ts-node end-to-end.ts
