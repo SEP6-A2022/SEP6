@@ -14,6 +14,7 @@ export const deployContainer = async (config: IDockerSettings, dbConnectionStrin
     const jwtAccessSecret = await getSecretValue("JWT_ACCESS_SECRET")
     const jwtRefreshSecret =  await getSecretValue("JWT_REFRESH_SECRET")
     const githubOauthSecret =  await getSecretValue("GITHUB_OAUTH_SECRET")
+    const omdbSecret =  await getSecretValue("OMDB_API_KEY")
 
     // Note: Run `gcloud auth configure-docker` in your command line to configure auth to GCR.
     const imageName = "express-app";
@@ -61,6 +62,10 @@ export const deployContainer = async (config: IDockerSettings, dbConnectionStrin
                         {
                             name: "JWT_REFRESH_TOKEN_SECRET_STRING",
                             value: jwtRefreshSecret
+                        },
+                        {
+                            name: "OMDB_API_KEY",
+                            value: omdbSecret
                         },
                         {
                             name: "time",

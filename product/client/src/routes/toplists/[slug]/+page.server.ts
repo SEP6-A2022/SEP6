@@ -39,7 +39,6 @@ export const load : Load = async ({params}) => {
             movies.push(one)
         }
     }
-    console.log(movies)
     return { 
         toplist,
         movies: JSON.parse(JSON.stringify(movies))}
