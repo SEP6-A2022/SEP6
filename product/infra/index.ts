@@ -3,13 +3,16 @@ import * as gcp from "@pulumi/gcp";
 import { dbPassword, PulumiStackSettings } from "./src"
 import { deployContainer } from "./src/docker";
 import { getOutputValue, getSecretValue, getSecretValueFromOutput } from "./src/util";
+import { createDnsZone } from "./src/dns";
 
 let config = new pulumi.Config();
 let clusterSettings = config.requireObject<PulumiStackSettings>("stack_settings");
 
 const main =async () => {
+    const zone = await createDnsZone(clusterSettings.docker.dns_name)
+
     const instance = new gcp.sql.DatabaseInstance("instance", {
-        region: "europe-west1",
+        region: gcp.config.zone ?? "",
         databaseVersion: "POSTGRES_14",
         settings: {
             tier: "db-f1-micro",
@@ -25,12 +28,7 @@ const main =async () => {
     const ipAddress = await getOutputValue(instance.publicIpAddress)
     const connectionString =  `postgresql://db-user:${dbSecret}@${ipAddress}:5432/${dbName}?schema=public`
 
-    const res = await deployContainer(clusterSettings.docker, connectionString)
-
-    const containerStatuses = await getOutputValue(res.statuses)
-    const url = containerStatuses[0].url
-
-    pulumi.log.info(url)
+    const res = await deployContainer(clusterSettings.docker, connectionString, zone)
 }
 
 main()
