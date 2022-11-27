@@ -108,10 +108,12 @@ or in the UI import and select the DB and file.
 
 <https://www.prisma.io/docs/concepts/components/introspection#the-prisma-introspect-command>
 
-16. Export docker platform
+16. For local development/deployment
 
 ```sh
 export DOCKER_DEFAULT_PLATFORM=linux/amd64
+export JWT_ACCESS_TOKEN_SECRET_STRING="abc"
+export JWT_REFRESH_TOKEN_SECRET_STRING="abc2"
 ```
 
 if running manually on a MAC with M1

@@ -1,10 +1,11 @@
 import { error } from '@sveltejs/kit';
+import type { Load} from "@sveltejs/kit"
 
 import { PrismaClient, type movies, type people, type ratings } from '@prisma/client'
 const prisma = new PrismaClient()
 
 /** @type {import('./$types').PageServerLoad} */
-export async function load({ params }) {
+export const load : Load = async ({ params }) => {
     let movieId = params.slug as string
     movieId = movieId.replaceAll("t", "")
     const isnum = /^\d+$/.test(movieId);

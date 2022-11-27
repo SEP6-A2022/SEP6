@@ -2,10 +2,11 @@
 import { goto } from '$app/navigation';
 let searchedMovie = ""
 import { getStores, navigating, page, updated } from '$app/stores';
+	import type { movies } from '@prisma/client';
 	import { onMount } from 'svelte';
 
 let timeout: NodeJS.Timeout | undefined  =  undefined
-let movies = []
+let movies: movies[] = []
 let input: HTMLInputElement;
 
 onMount(async ()=>{
