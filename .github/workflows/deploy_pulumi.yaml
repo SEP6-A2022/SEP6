@@ -43,6 +43,7 @@ jobs:
       run: pulumi up -y
 
   Run_tests:
+    needs: Pulumi_up
     runs-on: ubuntu-latest
     steps:
       - uses: 'actions/checkout@v3'
