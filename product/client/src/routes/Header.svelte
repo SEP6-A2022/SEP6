@@ -7,9 +7,7 @@
 
 <header>
 	<div class="corner">
-		<a href="https://kit.svelte.dev">
-			<img src={logo} alt="SvelteKit" />
-		</a>
+
 	</div>
 
 	<nav>
@@ -19,12 +17,6 @@
 		<ul>
 			<li aria-current={$page.url.pathname === '/' ? 'page' : undefined}>
 				<a href="/">Home</a>
-			</li>
-			<li aria-current={$page.url.pathname === '/about' ? 'page' : undefined}>
-				<a href="/about">About</a>
-			</li>
-			<li aria-current={$page.url.pathname.startsWith('/sverdle') ? 'page' : undefined}>
-				<a href="/sverdle">Sverdle</a>
 			</li>
 			<li aria-current={$page.url.pathname.includes("movies") ? 'page' : undefined}>
 				<a href="/movies">Movies</a>
@@ -47,7 +39,7 @@
 	</nav>
 
 	<div class="corner">
-		<a href="https://github.com/sveltejs/kit">
+		<a href="https://github.com/sep6-a2022/sep6">
 			<img src={github} alt="GitHub" />
 		</a>
 	</div>

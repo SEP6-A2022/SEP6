@@ -13,7 +13,7 @@
 	</main>
 
 	<footer>
-		<p>visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit</p>
+		<p>visit <a href="https://github.com/sep6-a2022/sep6">github.com/sep6-a2022/sep6</a> <br> to learn more about this project</p>
 	</footer>
 </div>
 
