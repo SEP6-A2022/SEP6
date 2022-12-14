@@ -41,7 +41,9 @@ export const load: Load = async ({ params, url }) => {
       })
     const userData = await userInfo.json() as IUserResponse
 
-    if(userInfo.ok || !userData)
+    console.log(await userInfo.text())
+
+    if(userInfo.ok || !userData || !userData.email)
     {
         if(!accessSigningKey) throw error(500, "Cannot retreive user info! Code 5");
     }
