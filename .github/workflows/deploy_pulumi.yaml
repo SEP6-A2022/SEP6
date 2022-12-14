@@ -55,5 +55,5 @@ jobs:
       - name: Check availability
         working-directory: product/tests
         env:
-          BASE_URL: http://best-movies.cc
+          BASE_URL: https://best-movies.cc
         run: npx ts-node end-to-end.ts
