@@ -5,7 +5,7 @@ import { getOutputValue } from "./util";
 export const createDnsZone =async (zoneName: string) => {
     const hostedZone = new gcp.dns.ManagedZone("hosted-zone", {
         description: `Hosted zone for ${zoneName}.`,
-        name: zoneName.replace(/\./g, "-"),
+        name: "sep6zone",
         dnsName: `${zoneName}.`,
         labels: {
             deployment: "pulumi",

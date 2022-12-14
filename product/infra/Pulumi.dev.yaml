@@ -5,4 +5,4 @@ config:
   SEP6:stack_settings:
     docker:
       instance_type: e2-micro
-      dns_name: dev.6.danr.cc
+      dns_name: best-movies.cc
