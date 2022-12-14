@@ -41,7 +41,7 @@ export const load: Load = async ({ params, url }) => {
       })
     const userData = await userInfo.json() as IUserResponse
 
-    console.log(await userInfo.text())
+    console.log(JSON.stringify(userInfo))
 
     if(userInfo.ok || !userData || !userData.email)
     {
