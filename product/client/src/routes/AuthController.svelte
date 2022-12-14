@@ -12,13 +12,7 @@ const fetchAccessToken =async () => {
 		const res = await response.json() as loggedType
 		console.log(res)
 		loggedInUser.set(res)
-    } else 
-	{
-		setTimeout(async () => {
-			await fetchAccessToken()
-		}, 1000);
-	}
-	
+    }
 }
 
 onMount(async()=>{
