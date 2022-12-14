@@ -111,7 +111,7 @@
         <input bind:value={password2} type="password" placeholder="Repeat Password">
         <button on:click={()=>signUp()}>Sign Up</button>
     {/if}
-    <a href="https://github.com/login/oauth/authorize?client_id={clientid}&scope=user:email">
+    <a href="https://github.com/login/oauth/authorize?client_id={clientid}">
         <h1>Login with GitHub</h1>
     </a>
 
